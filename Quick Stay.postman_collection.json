@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "4d21bc1a-be9d-4c9d-999b-f6e280b2ee53",
+		"name": "Quick Stay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2518867"
+	},
+	"item": [
+		{
+			"name": "/user/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"tayyabt120\",\r\n\t\"password\": \"Password\",\r\n\t\"dob\": \"1995-11-07T10:57:35.836Z\",\r\n\t\"mobile\": \"7385470800\",\r\n\t\"name\": \"Tayyab Tamboli\",\r\n\t\"address\": \"Pune\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"tayyabt120\",\r\n\t\"otpSessionId\": \"eb9cce06-5db6-40fc-96d1-475cf8c13657\",\r\n\t\"otpValue\": \"552641\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"tayyabt120\",\r\n\t\"password\": \"Password\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/profile/tayyabt120",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "f1e09f7c-4b49-4019-a14c-82864e2c9d02"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/user/profile/tayyabt120",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"profile",
+						"tayyabt120"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "f1e09f7c-4b49-4019-a14c-82864e2c9d02"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
