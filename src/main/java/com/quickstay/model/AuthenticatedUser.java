@@ -6,6 +6,7 @@ public class AuthenticatedUser {
 
     private String username;
     private String name;
+    private UserRole userRole;
     private String token;
     private Calendar expiryTime;
 
@@ -18,6 +19,14 @@ public class AuthenticatedUser {
 
     public AuthenticatedUser() {
 
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public String getUsername() {

@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
 
-    Optional<User> findByUsernameAndPasswordAndActive(String username, String password, boolean active);
+    Optional<User> findByUsernameAndPassword(String username, String password);
 }

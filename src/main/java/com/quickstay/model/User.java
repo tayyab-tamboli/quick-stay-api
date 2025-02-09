@@ -1,10 +1,7 @@
 package com.quickstay.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -19,10 +16,7 @@ public class User {
     private String mobile;
     private Date dob;
     private String address;
-    private boolean isAdmin;
-    private boolean active;
-    @Transient
-    private String otpSessionId;
+    private UserRole userRole;
 
     public User() {
     }
@@ -75,27 +69,11 @@ public class User {
         this.address = address;
     }
 
-    public boolean isActive() {
-        return active;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getOtpSessionId() {
-        return otpSessionId;
-    }
-
-    public void setOtpSessionId(String otpSessionId) {
-        this.otpSessionId = otpSessionId;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }

@@ -1,7 +1,9 @@
 package com.quickstay.api;
 
 import com.quickstay.exception.UserException;
-import com.quickstay.model.*;
+import com.quickstay.model.AuthenticatedUser;
+import com.quickstay.model.User;
+import com.quickstay.model.UserLogin;
 import com.quickstay.service.UserAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +16,8 @@ public class LoginController {
     UserAppService userAppService;
 
     @PostMapping("/register")
-    public UserResponse registerUser(@RequestBody User user) throws Exception {
-        User registeredUser = userAppService.register(user);
-        return getResponseObject(registeredUser, "USER CREATED");
-    }
-
-    @PostMapping("/authenticate")
-    public UserResponse authenticateUser(@RequestBody UserOTPAuth otpAuth) throws UserException {
-        User authenticateUser = userAppService.authenticateUser(otpAuth);
-        return getResponseObject(authenticateUser, "USER AUTHENTICATED");
+    public User registerUser(@RequestBody User user) throws Exception {
+        return userAppService.register(user);
     }
 
     @PostMapping("/login")
@@ -36,16 +31,7 @@ public class LoginController {
     }
 
     @GetMapping("/profile/{username}")
-    public UserResponse getProfileByUsername(@PathVariable(value = "username", required = true) String username) throws UserException {
-        User user = userAppService.findUserByUsername(username);
-        return getResponseObject(user, "USER FOUND");
-    }
-
-    private UserResponse getResponseObject(User user, String message) {
-        UserResponse userResponse = new UserResponse();
-        Response response = new Response(200, "SUCCESS", message);
-        userResponse.setUser(user);
-        userResponse.setResponse(response);
-        return userResponse;
+    public User getProfileByUsername(@PathVariable(value = "username") String username) throws UserException {
+        return userAppService.findUserByUsername(username);
     }
 }
