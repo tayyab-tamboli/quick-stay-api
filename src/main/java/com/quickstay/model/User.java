@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "QUICK_STAY_USER")
@@ -16,7 +17,10 @@ public class User {
     private String mobile;
     private Date dob;
     private String address;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    @OneToMany(mappedBy = "user")
+    private List<Booking> bookings;
 
     public User() {
     }

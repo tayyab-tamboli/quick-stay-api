@@ -1,5 +1,6 @@
 package com.quickstay.filter;
 
+import com.quickstay.model.UserRole;
 import com.quickstay.service.UserAppService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +39,29 @@ public class RestAuthFilter implements Filter {
                     && UserAppService.authUsers.get(token).getExpiryTime().after(now)) {
                 UserAppService.authUsers.remove(token);
                 chain.doFilter(request, response);
+            }
+        } else if (httpRequest.getRequestURL().indexOf("/api/hotels") != -1) {
+            String token = httpRequest.getHeader("auth-token");
+            Calendar now = Calendar.getInstance();
+            if (!StringUtils.isEmpty(token) && UserAppService.authUsers.containsKey(token)
+                    && UserAppService.authUsers.get(token).getExpiryTime().after(now)
+                    && UserAppService.authUsers.get(token).getUserRole() == UserRole.ADMIN) {
+                chain.doFilter(request, response);
+            } else {
+                HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+                httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+            }
+        } else if (httpRequest.getRequestURL().indexOf("/api/booking") != -1
+                || httpRequest.getRequestURL().indexOf("/api/payments") != -1) {
+            String token = httpRequest.getHeader("auth-token");
+            Calendar now = Calendar.getInstance();
+            if (!StringUtils.isEmpty(token) && UserAppService.authUsers.containsKey(token)
+                    && UserAppService.authUsers.get(token).getExpiryTime().after(now)
+                    && UserAppService.authUsers.get(token).getUserRole() == UserRole.USER) {
+                chain.doFilter(request, response);
+            } else {
+                HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+                httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
             }
         } else
             chain.doFilter(request, response);
